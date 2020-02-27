@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<!-- saved from url=(0027)https://waifu2x.booru.pics/ -->
+<html class="gr__waifu2x_booru_pics">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" async="" src="../static/index/js/recaptcha__zh_cn.js"></script>
+	<!-- recapthca 通过前端加密来保证数据传输的安全性，不会被直接伪造脏数据
+		recapthca 通过分析浏览器特征，判断是否为phantom等非真实浏览器环境
+		recapthca 通过行为模型，分析采集的数据是否具有机器风险
+		recapthca 对应有机器风险的用户，会出图形分类验证码进行二次验证，而没有风险的用户，会直接通过
+		recapthca 的用户体验远远高于普通的验证码
+		recapthca 的安全性可能会高于传统的验证码方案 -->
+	<script async="" src="../static/index/js/analytics.js"></script>
+	<!-- 此条js用于监控用户与网站的互动 -->
+	<script type="text/javascript" src="../static/index/js/jquery-2.1.4.min.js"></script>
+	<!-- jQuery是一个快速、简洁的JavaScript框架，是继Prototype之后又一个优秀的JavaScript代码库（或JavaScript框架）。jQuery设计的宗旨是“write Less，Do More”，即倡导写更少的代码，做更多的事情。它封装JavaScript常用的功能代码，提供一种简便的JavaScript设计模式，优化HTML文档操作、事件处理、动画设计和Ajax交互。    --百度百科 -->
+	<script type="text/javascript" src="../static/index/js/bootstrap.min.js"></script>
+	<!-- 此为bootstrap框架使用 -->
+	<link rel="stylesheet" href="../static/index/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../static/index/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../static/index/css/animate.min.css">
+	<!-- CSS3库,用于实现动态效果 -->
+	<title>ImageProcessing</title>
+
+	<!-- 此处设置了动态字体的效果 -->
+	<style>
+		.pulse2 {
+			display: inline-block;
+			margin-left: 80px;
+			height: 50px;
+
+		}
+
+		.pulse2p {
+			<!-- transform: rotate(-15deg);    字体变斜-->
+			display: inline-block;
+		}
+	</style>
+
+	<!-- 此处为载入analytics.js -->
+	<script>
+		(function (i, s, o, g, r, a, m) {
+			i['GoogleAnalyticsObject'] = r;
+			i[r] = i[r] || function () {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date();
+			a = s.createElement(o),
+				m = s.getElementsByTagName(o)[0];
+			a.async = 1;
+			a.src = g;
+			m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '/static/index/js/analytics.js', 'ga');
+
+		ga('create', 'UA-16180617-29', 'auto');
+		ga('send', 'pageview');
+	</script>
+
+
+</head>
+
+<!--
+<body style="background-image: url(.../templates/index/back.jpg); 
+		background-position: right top; 
+		background-repeat: no-repeat;" data-gr-c-s-loaded="true">
+-->
+<body style="background-image: url(../static/index/img/back.jpg); background-size: 100% 100%;
+		background-repeat: no-repeat;" data-gr-c-s-loaded="true">
+		
+	<script src="../static/index/js/api.js"></script>
+	<!-- 调用验证码程序-->
+
+
+	<div class="container" id="container">
+		<div class="page-header">
+			<!-- Bootstrap表格布局方法 -->
+			<div class="col-md-12">
+				<h1> Picture - Processing </h1>
+				<span class="pulse2p">
+					<h2 class="animated infinite pulse pulse2"> SWING &nbsp IT !!</h2>
+				</span>
+			</div>
+		</div>
+
+		<!-- 根据图片上传方式切换Tab -->
+		<!-- 切换tab可以通过data-toggle或者js实现，既然下面有data-toggle，干嘛还要这个啊= = -->
+		<script type="text/javascript">
+			$(document).ready(function (event) {
+				$('ul.nav.nav-pills a:first').tab('show'); // Select first tab
+				$('ul.nav.nav-pills a[href="' + window.location.hash + '"]').tab(
+					'show'); // Select tab by name if provided in location hash
+				$('ul.nav.nav-tabs a[data-toggle="tab"]').on('shown', function (
+					event) { // Update the location hash to current tab
+					window.location.hash = event.target.hash;
+				})
+				//此处为自添代码
+
+				var formJson
+				//展开额外选项函数
+				function showExpandDiv(the_node) {
+					//判断单选值，为2则展开选项
+					if (the_node == 2) {
+						var width = $("#width").val();
+						var height = $("#height").val();
+						//显示调整大小表单
+						$(".form-group.hid").show();
+					} else {
+						$(".form-group.hid").hide();
+					}
+				}
+
+				//若变换tab则先进行选项判断
+				$('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+					var activeTab = $(e.target).text();
+					//如果选择以文件方式上传
+					if (activeTab == "From File") {
+						var node = $("input:radio[name='denoise']")
+						var the_node
+						var formJson = {}
+
+						//检测node
+						for (i = 0; i < 3; i++) {
+							if (node[i].checked) {
+								the_node = node[i].value
+								showExpandDiv(the_node)
+							}
+						}
+
+					}
+					//如果选择以URL方式上传 
+					else {
+						var node = $("input:radio[name='denoise']")
+						var the_node
+						var formJson = {}
+						//检测node
+						for (i = 3; i < node.length; i++) {
+							if (node[i].checked) {
+								the_node = node[i].value
+								showExpandDiv(the_node)
+							}
+						}
+					}
+
+				});
+
+				//若在当前tab内切换，则再做判断
+				$('input[type=radio][name=denoise]').change(function () {
+					var activeTab = $('li.active').get(0).textContent
+					//如果选择以文件方式上传
+					if (activeTab == "From File") {
+						var node = $("input:radio[name='denoise']")
+						var the_node
+						var formJson = {}
+
+						//检测node
+						for (i = 0; i < 3; i++) {
+							if (node[i].checked) {
+								the_node = node[i].value
+								showExpandDiv(the_node)
+							}
+						}
+
+					}
+					//如果选择以URL方式上传 
+					else {
+						console.log("no")
+						var node = $("input:radio[name='denoise']")
+						var the_node
+						var formJson = {}
+
+						//检测node
+						for (i = 3; i < node.length; i++) {
+							if (node[i].checked) {
+								the_node = node[i].value
+								showExpandDiv(the_node)
+							}
+						}
+					}
+
+					//显示对应拓展表单
+					//@param the_node 
+				});
+			});
+		</script>
+
+
+		<!-- 此处为表格的详细实现 -->
+		<!-- 此处调用了bootstrap框架中的内容 -->
+		<div class="row">
+			<div class="col-md-3 col-xs-0"></div>
+			<div class="col-md-6 col-xs-12">
+				<div class="panel panel-primary">
+					<!-- 表头名字 -->
+					<div class="panel-heading">Now work on your image</div>
+					<div class="tabbable tabs-top panel-body">
+						<ul class="nav nav-pills" data-tabs="pill">
+							<!-- 和前面的javascript代码一起实现 显示选中标签 -->
+							<li class="active"><a href="https://waifu2x.booru.pics/#upload" data-toggle="pill"
+									aria-expanded="true">From File</a></li>
+							<li class=""><a href="https://waifu2x.booru.pics/#url" data-toggle="pill"
+									aria-expanded="false">From URL</a></li>
+						</ul>
+
+						<!-- 若选中上传方式为本地上传 -->
+						<div class="tab-content" style="margin-top: 15px">
+							<div class="tab-pane fade in active" id="upload">
+								<!-- 此处为文件上传的位置，虽然不太清楚这个位置在干嘛 -->
+								<form action="/process" method="POST"
+									enctype="multipart/form-data" class="form">
+									<!-- 此处上传图片文件 -->
+									<div class="form-group">
+										<label for="img">File: </label>
+										<input type="file" placeholder="File" id="img" name="img" class="form-control">
+									</div>
+									<div style="font-size: x-small">
+										Maximum file size: 8M, 3840x3840 </div>
+
+									<!-- 此处进行功能选择 -->
+									<div class="form-group">
+										<label for="denoise">Process mode: </label>
+										<label class="radio-inline">
+											<input type="radio" name="denoise" value="0"> Enlarge
+										</label>
+										<label class="radio-inline">
+											<input type="radio" name="denoise" value="1" checked="checked"> Shrink
+										</label>
+
+										<label class="radio-inline">
+											<input type="radio" name="denoise" value="2"> Matting
+										</label>
+
+
+									</div>
+
+									<div class="form-group hid" style="display: none;">
+										<label for="width"> $ the width you hope: <input type="number" step="1" min="0"
+												max="100" value="1" id="width" name="width" />
+										</label>
+										<label for="height"> $ the height you hope: <input type="number" step="1"
+												min="0" max="100" value="1" id="height" name="height" />
+										</label>
+									</div>
+									<!-- 此处上传放大程度 -->
+									<!--					<div class="form-group">
+										<label for="scale">Scale: </label>
+										<label class="radio-inline">
+											<input type="radio" name="scale" value="1"> None
+										</label>
+										<label class="radio-inline">
+											<input type="radio" name="scale" value="2" checked="checked"> 2x
+										</label>
+									</div>
+									<div class="form-group">
+									</div>
+				-->
+									<!-- 点击上传 -->
+									<button type="submit" id="submit" name="submit"
+										class="btn btn-default">Work</button>
+								</form>
+							</div>
+
+
+							<!-- 此处为选择“URL方式上传”的代码 -->
+							<div class="tab-pane fade" id="url">
+								<form action="https://waifu2x.booru.pics/Home/fromlink" method="POST" class="form">
+									<div class="form-group">
+										<label for="url">URL: </label> <input type="text" id="url" name="url"
+											class="form-control" value="">
+									</div>
+									<div style="font-size: x-small">
+										Maximum file size: 8M, 3840x3840 </div>
+
+									<div class="form-group">
+										<label for="denoise">Process mode: </label>
+										<label class="radio-inline">
+											<input type="radio" name="denoise" value="0"> Enlarge
+										</label>
+										<label class="radio-inline">
+											<input type="radio" name="denoise" value="1" checked="checked"> Shrink
+										</label>
+										<label class="radio-inline">
+											<input type="radio" name="denoise" value="2"> Matting
+										</label>
+									</div>
+
+
+									<div class="form-group hid" style="display: none;">
+										<label for="width"> $ the width you hope: <input type="number" step="1" min="0"
+												max="100" value="1" id="width" name="width" />
+										</label>
+										<label for="height"> $ the height you hope: <input type="number" step="1"
+												min="0" max="100" value="1" id="height" name="height" />
+										</label>
+									</div>
+
+
+
+									<div class="form-group">
+									</div>
+									<button type="submit" id="submit" name="submit"
+										class="btn btn-default">Work</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 col-xs-0">
+
+			</div>
+		</div>
+
+
+		<!-- 后面为装饰布局 -->
+		<!--	<div class="row" style="background-color: rgba(255, 255, 255, 0.75)">
+			<div class="col-md-4">
+				<h2>Double the size of your images!</h2>
+				<p>
+					This site will enhance your images and increase the resolution
+					twofold.
+				</p>
+			</div>
+			<div class="col-md-4">
+				<h2>No pixelization, no blurriness</h2>
+				<p>
+					We use advanced algorithms that try to prevent pixelization and blurry outcomes.
+				</p>
+			</div>
+			<div class="col-md-4">
+				<h2>Specialized for anime and manga styles</h2>
+				<p>
+					Sorry, photos will probably not work well. You can, try though!
+				</p>
+			</div>
+		</div>			-->
+		<div class="col-md-12 text-center" style="margin-top: 50px">
+			<p style="font-size: larger;color: white" >Learn more about our program </p>
+			<p><a href='\about' target=_parent><img src="/static/index/img/self.jpg"
+                                                        style="width: 263px; height: 102px; "></a>
+			</p>
+			<p style="color:white" >
+				©2019 Picture Processing Project
+			</p>
+		</div>
+	</div>
+
+
+
+
+
+</body>
+
+</html>
