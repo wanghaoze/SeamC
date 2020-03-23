@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Seam.iml" filepath="$PROJECT_DIR$/.idea/Seam.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/flaskr-master.iml" filepath="$PROJECT_DIR$/.idea/flaskr-master.iml" />
     </modules>
   </component>
 </project>
