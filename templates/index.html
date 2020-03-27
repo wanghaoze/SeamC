@@ -162,24 +162,6 @@
 						}
 
 					}
-					//如果选择以URL方式上传 
-					else {
-						console.log("no")
-						var node = $("input:radio[name='denoise']")
-						var the_node
-						var formJson = {}
-
-						//检测node
-						for (i = 3; i < node.length; i++) {
-							if (node[i].checked) {
-								the_node = node[i].value
-								showExpandDiv(the_node)
-							}
-						}
-					}
-
-					//显示对应拓展表单
-					//@param the_node 
 				});
 			});
 		</script>
@@ -194,12 +176,7 @@
 				<div class="panel panel-primary">
 					<!-- 表头名字 -->
 					<div class="panel-heading">Now work on your image</div>
-					<div class="tabbable tabs-top panel-body">
-<!--						<ul class="nav nav-pills" data-tabs="pill">-->
-<!--							&lt;!&ndash; 和前面的javascript代码一起实现 显示选中标签 &ndash;&gt;-->
-<!--							<li class="active"><a href="https://waifu2x.booru.pics/#upload" data-toggle="pill"-->
-<!--									aria-expanded="true">From File</a></li>-->
-<!--						</ul>-->
+					<div class="tabbable tabs-top panel-body" style="height: 25rem">
 
 						<!-- 若选中上传方式为本地上传 -->
 						<div class="tab-content" style="margin-top: 15px">
@@ -213,77 +190,15 @@
 										<input type="file" placeholder="File" id="img" name="img" class="form-control">
 									</div>
 									<div style="font-size: x-small">
-										Maximum file size: 8M, 3840x3840 </div>
-
-									<div class="form-group hid" style="display: none;">
-										<label for="width"> $ the width you hope: <input type="number" step="1" min="0"
-												max="100" value="1" id="width" name="width" />
-										</label>
-										<label for="height"> $ the height you hope: <input type="number" step="1"
-												min="0" max="100" value="1" id="height" name="height" />
-										</label>
-									</div>
-									<!-- 此处上传放大程度 -->
-									<!--					<div class="form-group">
-										<label for="scale">Scale: </label>
-										<label class="radio-inline">
-											<input type="radio" name="scale" value="1"> None
-										</label>
-										<label class="radio-inline">
-											<input type="radio" name="scale" value="2" checked="checked"> 2x
-										</label>
-									</div>
-									<div class="form-group">
-									</div>
-				-->
-									<!-- 点击上传 -->
+										Maximum file size: 2M, 1920x1920 </div>
+									<div style="padding-top: 4.5rem;padding-left: 23rem">
 									<button type="submit" id="submit" name="submit"
-										class="btn btn-default">Work</button>
+										class="btn btn-default">OK</button>
+									</div>
 								</form>
 							</div>
 
 
-							<!-- 此处为选择“URL方式上传”的代码 -->
-							<div class="tab-pane fade" id="url">
-								<form action="https://waifu2x.booru.pics/Home/fromlink" method="POST" class="form">
-									<div class="form-group">
-										<label for="url">URL: </label> <input type="text" id="url" name="url"
-											class="form-control" value="">
-									</div>
-									<div style="font-size: x-small">
-										Maximum file size: 8M, 3840x3840 </div>
-
-									<div class="form-group">
-										<label for="denoise">Process mode: </label>
-										<label class="radio-inline">
-											<input type="radio" name="denoise" value="0"> Enlarge
-										</label>
-										<label class="radio-inline">
-											<input type="radio" name="denoise" value="1" checked="checked"> Shrink
-										</label>
-										<label class="radio-inline">
-											<input type="radio" name="denoise" value="2"> Matting
-										</label>
-									</div>
-
-
-									<div class="form-group hid" style="display: none;">
-										<label for="width"> $ the width you hope: <input type="number" step="1" min="0"
-												max="100" value="1" id="width" name="width" />
-										</label>
-										<label for="height"> $ the height you hope: <input type="number" step="1"
-												min="0" max="100" value="1" id="height" name="height" />
-										</label>
-									</div>
-
-
-
-									<div class="form-group">
-									</div>
-									<button type="submit" id="submit" name="submit"
-										class="btn btn-default">Work</button>
-								</form>
-							</div>
 						</div>
 					</div>
 				</div>
