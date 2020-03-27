@@ -9,19 +9,30 @@
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <script type="text/javascript">
-    $(function () {
-        $('.nav li').click(function () {
-            $(this).addClass('active').siblings().removeClass('active');
-//          $('.tab-top li').eq($(this).index()).addClass('active').siblings().removeClass('active');  tab按钮第二种写法
-            var index=$(this).index();
-            postMessage(index);
-            $(".tab-con .m7").eq(index).show().siblings().hide();
-        })
-    })
-</script>
-<script>
-     {#document.addEventListener('DOMContentLoaded', () => {#}
-     {#       });#}
+    function ff1() {
+        document.getElementById('div1').className='m8';
+        document.getElementById('div2').className='m7';
+        document.getElementById('div3').className='m7';
+        document.getElementById('li1').className='active';
+        document.getElementById('li2').className='';
+        document.getElementById('li3').className='';
+    }
+    function ff2() {
+        document.getElementById('div1').className='m7';
+        document.getElementById('div2').className='m8';
+        document.getElementById('div3').className='m7';
+        document.getElementById('li1').className='';
+        document.getElementById('li2').className='active';
+        document.getElementById('li3').className='';
+    }
+    function ff3() {
+        document.getElementById('div1').className='m7';
+        document.getElementById('div2').className='m7';
+        document.getElementById('div3').className='m8';
+        document.getElementById('li1').className='';
+        document.getElementById('li2').className='';
+        document.getElementById('li3').className='active';
+    }
 </script>
 
 
@@ -58,7 +69,7 @@
         .tab-con .m7{
             display: none;
         }
-        .tab-con .m7:first-child{
+        .tab-con .m8{
             display: block;
         }
     </style>
@@ -77,74 +88,103 @@
                     <img src= 'original.jpg'>
 <!--                    <img src='/static/process.jpg'>-->
                 </div>
-                <form action="/process" method="post">
+                <form action="/process" method="POST" enctype="multipart/form-data" class="form">
                 <div class="col-lg-4 tabbable tabs-top panel-body" style="margin-top:4.4rem;background-color: #957bbe;border-radius: .25rem;">
                     <ul class="nav nav-pills" data-tabs="pill">
-                        <li class="active"><a href="" data-toggle="pill" aria-expanded="true">智能缩放</a></li>
-                        <li class=""><a href="" data-toggle="pill" aria-expanded="false">保护蒙版</a></li>
-                        <li class=""><a href="" data-toggle="pill" aria-expanded="false">抠图蒙版</a></li>
+                        <li id='li1' class="active"><a onclick="ff1()" data-toggle="pill" aria-expanded="true">智能缩放</a></li>
+                        <li id='li2' class=""><a onclick="ff2()" data-toggle="pill" aria-expanded="false">保护蒙版</a></li>
+                        <li id='li3' class=""><a onclick="ff3()" data-toggle="pill" aria-expanded="false">抠图蒙版</a></li>
                     </ul>
                     <div class="tab-con">
-                        <div class="m7">
+                        <div class="m8" id="div1">
                             <div style="background-color: #80bdff;height: 12rem">
 
-                        <div style="position: absolute;padding-top: 2.5rem; height: 10rem">
-                            <div class="my_container-sidebar-right"><p style="margin-top: 0.5rem;margin-bottom: 0.5rem">宽度(px):</p></div>
-                            <div class="my_container-sidebar-body">
-                                <input type="text" name="the_width" class="form-control" id="search-input" placeholder="dis_width"
+                                <div style="position: absolute;padding-top: 2.5rem; height: 10rem">
+                                    <div class="my_container-sidebar-right"><p style="margin-top: 0.5rem;margin-bottom: 0.5rem">宽度(px):</p></div>
+                                    <div class="my_container-sidebar-body">
+                                        <input type="text" name="the_width" class="form-control" id="search-input1" placeholder="dis_width"
                                aria-label="目标宽度(px)" autocomplete="off" data-docs-version="4.3" spellcheck="false"
                                role="combobox" aria-autocomplete="list" aria-expanded="false"
                                aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="position: relative; vertical-align: top;">
-                            </div>
+                                    </div>
 
-                            <div class="my_container-sidebar-right"><p style="margin-top: 0.5rem;margin-bottom: 0.5rem">高度(px):</p></div>
-                            <div class="my_container-sidebar-body">
-                                <input type="text" name="the_height" class="form-control" id="search-input" placeholder="dis_height"
+                                    <div class="my_container-sidebar-right"><p style="margin-top: 0.5rem;margin-bottom: 0.5rem">高度(px):</p></div>
+                                    <div class="my_container-sidebar-body">
+                                    <input type="text" name="the_height" class="form-control" id="search-input2" placeholder="dis_height"
                                aria-label="目标高度(px)" autocomplete="off" data-docs-version="4.3" spellcheck="false"
                                role="combobox" aria-autocomplete="list" aria-expanded="false"
                                aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="position: relative; vertical-align: top;">
+                                    </div>
+                                </div>
                             </div>
-
-<!--                            <div class="my_container-sidebar-right"><p style="margin-top: 0.5rem;margin-bottom: 0.5rem">宽度(%):</p></div>-->
-<!--                            <div class="my_container-sidebar-body">-->
-<!--                                <input type="text" class="form-control" id="search-input" placeholder="500"-->
-<!--                               aria-label="目标宽度(%)" autocomplete="off" data-docs-version="4.3" spellcheck="false"-->
-<!--                               role="combobox" aria-autocomplete="list" aria-expanded="false"-->
-<!--                               aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="position: relative; vertical-align: top;">-->
-<!--                            </div>-->
-
-<!--                            <div class="my_container-sidebar-right"><p style="margin-top: 0.5rem;margin-bottom: 0.5rem">高度(%):</p></div>-->
-<!--                            <div class="my_container-sidebar-body">-->
-<!--                                <input type="text" class="form-control" id="search-input" placeholder="80"-->
-<!--                               aria-label="目标高度(%)" autocomplete="off" data-docs-version="4.3" spellcheck="false"-->
-<!--                               role="combobox" aria-autocomplete="list" aria-expanded="false"-->
-<!--                               aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="position: relative; vertical-align: top;">-->
-<!--                            </div>-->
-                        </div>
-
-
-                      <!--
-{#                    <div class="container-fluid">#}
-{#                        <label>#}
-{#                            <ul>#}
-{#                                <li><p style="position: relative">目标长度:</p><input class="inputText" type="text" placeholder="目标长度(px)"></li>#}
-{#                                <li></li>#}
-{#                            </ul>#}
-{#                            <input class="inputText" type="text" placeholder="目标宽度(px)">#}
-{#                            <input class="inputText" type="text" placeholder="目标长度(%)">#}
-{#                            <input class="inputText" type="text" placeholder="目标宽度(%)">#}
-{#                        </label>#}
-{#                    </div>#}
-                        -->
-                </div>
                             <div style="padding-top: 1.5rem">
                                 <button type="submit" class="btn btn-dark">OK</button>
                             </div>
                         </div>
-                        <div class="m7">
-                            aaa
+                        <div class="m7" id="div2">
+                            <div style="background-color: #80bdff;height: 24rem">
+                                <div style="position: absolute;padding-top: 2.5rem; height: 10rem">
+                                    <div class="form-group">
+                                        <div style="position: absolute;padding-top: 2.5rem; height: 10rem">
+                                    <div class="my_container-sidebar-right"><p style="margin-top: 0.5rem;margin-bottom: 0.5rem">宽度(px):</p></div>
+                                    <div class="my_container-sidebar-body">
+                                        <input type="text" name="the_width1" class="form-control" id="search-input3" placeholder="dis_width"
+                               aria-label="目标宽度(px)" autocomplete="off" data-docs-version="4.3" spellcheck="false"
+                               role="combobox" aria-autocomplete="list" aria-expanded="false"
+                               aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="position: relative; vertical-align: top;">
+                                    </div>
+
+                                    <div class="my_container-sidebar-right"><p style="margin-top: 0.5rem;margin-bottom: 0.5rem">高度(px):</p></div>
+                                    <div class="my_container-sidebar-body">
+                                    <input type="text" name="the_height1" class="form-control" id="search-input4" placeholder="dis_height"
+                               aria-label="目标高度(px)" autocomplete="off" data-docs-version="4.3" spellcheck="false"
+                               role="combobox" aria-autocomplete="list" aria-expanded="false"
+                               aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="position: relative; vertical-align: top;">
+                                    </div>
+                                </div>
+                                        <div style="position: center;padding-top: 9rem; height: 10rem;">
+										<label for="pro_img">保护蒙版图片上传: </label>
+										<input type="file" placeholder="File" id="pro_img" name="pro_img" class="form-control">
+                                        </div>
+									</div>
+                                </div>
+                            </div>
+                            <div style="padding-top: 1.5rem">
+                                <button type="submit" class="btn btn-dark">OK</button>
+                            </div>
                         </div>
-                        <div class="m7">333</div>
+                        <div class="m7" id="div3">
+                            <div style="background-color: #80bdff;height: 24rem">
+                                <div style="position: absolute;padding-top: 2.5rem; height: 10rem">
+                                    <div class="form-group">
+                                        <div style="position: absolute;padding-top: 2.5rem; height: 10rem">
+                                    <div class="my_container-sidebar-right"><p style="margin-top: 0.5rem;margin-bottom: 0.5rem">宽度(px):</p></div>
+                                    <div class="my_container-sidebar-body">
+                                        <input type="text" name="the_width2" class="form-control" id="search-input5" placeholder="dis_width"
+                               aria-label="目标宽度(px)" autocomplete="off" data-docs-version="4.3" spellcheck="false"
+                               role="combobox" aria-autocomplete="list" aria-expanded="false"
+                               aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="position: relative; vertical-align: top;">
+                                    </div>
+
+                                    <div class="my_container-sidebar-right"><p style="margin-top: 0.5rem;margin-bottom: 0.5rem">高度(px):</p></div>
+                                    <div class="my_container-sidebar-body">
+                                    <input type="text" name="the_height2" class="form-control" id="search-input6" placeholder="dis_height"
+                               aria-label="目标高度(px)" autocomplete="off" data-docs-version="4.3" spellcheck="false"
+                               role="combobox" aria-autocomplete="list" aria-expanded="false"
+                               aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="position: relative; vertical-align: top;">
+                                    </div>
+                                </div>
+                                        <div style="position: center;padding-top: 9rem; height: 10rem;">
+										<label for="remove_img">抠图蒙版图片上传: </label>
+										<input type="file" placeholder="File" id="remove_img" name="remove_img" class="form-control">
+                                        </div>
+									</div>
+                                </div>
+                            </div>
+                            <div style="padding-top: 1.5rem">
+                                <button type="submit" class="btn btn-dark">OK</button>
+                            </div>
+                        </div>
                     </div>
             </div>
                 </form>

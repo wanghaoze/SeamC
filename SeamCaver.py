@@ -142,9 +142,6 @@ class SeamCaver:
 
     @staticmethod
     def backward_energy(image):
-        """
-        Simple gradient magnitude energy map.
-        """
         xGrad = ndi.convolve1d(image, np.array([1, 0, -1]), axis=1, mode='wrap')
         yGrad = ndi.convolve1d(image, np.array([1, 0, -1]), axis=0, mode='wrap')
         grad_mag = np.sqrt(np.sum(xGrad ** 2, axis=2) + np.sum(yGrad ** 2, axis=2))
@@ -231,10 +228,6 @@ class SeamCaver:
 
     @staticmethod
     def add_seam_grayscale(im, seam_idx):
-        """
-        Add a vertical seam to a grayscale image at the indices provided
-        by averaging the pixels values to the left and right of the seam.
-        """
         h, w = im.shape[:2]
         output = np.zeros((h, w + 1))
         for row in range(h):
@@ -265,9 +258,6 @@ class SeamCaver:
 
     @staticmethod
     def get_minimum_seam(im, mask=None, remove_mask=None):
-        """
-        DP algorithm for finding the seam of minimum energy.
-        """
         h, w = im.shape[:2]
         energyfn = SeamCaver.forward_energy if USE_FORWARD_ENERGY else SeamCaver.backward_energy
         M = energyfn(im)

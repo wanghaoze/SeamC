@@ -1,11 +1,12 @@
+# 使用jit来将接缝雕刻过程加速
 # USAGE:
 # python SeamCaver_two.py (-resize | -remove) -im IM -out OUT [-mask MASK]
 #                        [-rmask RMASK] [-dy DY] [-dx DX] [-vis] [-hremove] [-backward_energy]
 # Examples:
-# python SeamCaver_two.py -resize -im demos/ratatouille.jpg -out ratatouille_resize.jpg
-#        -mask demos/ratatouille_mask.jpg -dy 20 -dx -200 -vis
-# python SeamCaver_two.py -remove -im demos/eiffel.jpg -out eiffel_remove.jpg
-#        -rmask demos/eiffel_mask.jpg -vis
+# python SeamCaver_two.py -resize -im 【input.jpg】 -out 【output.jpg】
+#        -mask 【mask.jpg】 -dy 20 -dx -200 -vis
+# python SeamCaver_two.py -remove -im 【input.jpg】 -out 【output.jpg】
+#        -rmask 【remove_mask.jpg】 -vis
 
 import numpy as np
 import cv2
@@ -53,9 +54,6 @@ def rotate_image(image, clockwise):
 ########################################
 
 def backward_energy(im):
-    """
-    Simple gradient magnitude energy map.
-    """
     xgrad = ndi.convolve1d(im, np.array([1, 0, -1]), axis=1, mode='wrap')
     ygrad = ndi.convolve1d(im, np.array([1, 0, -1]), axis=0, mode='wrap')
 
@@ -69,12 +67,6 @@ def backward_energy(im):
 
 @jit
 def forward_energy(im):
-    """
-    Forward energy algorithm as described in "Improved Seam Carving for Video Retargeting"
-    by Rubinstein, Shamir, Avidan.
-    Vectorized code adapted from
-    https://github.com/axu2/improved-seam-carving.
-    """
     h, w = im.shape[:2]
     im = cv2.cvtColor(im.astype(np.uint8), cv2.COLOR_BGR2GRAY).astype(np.float64)
 
@@ -114,11 +106,6 @@ def forward_energy(im):
 
 @jit
 def add_seam(im, seam_idx):
-    """
-    Add a vertical seam to a 3-channel color image at the indices provided
-    by averaging the pixels values to the left and right of the seam.
-    Code adapted from https://github.com/vivianhylee/seam-carving.
-    """
     h, w = im.shape[:2]
     output = np.zeros((h, w + 1, 3))
     for row in range(h):
@@ -140,10 +127,6 @@ def add_seam(im, seam_idx):
 
 @jit
 def add_seam_grayscale(im, seam_idx):
-    """
-    Add a vertical seam to a grayscale image at the indices provided
-    by averaging the pixels values to the left and right of the seam.
-    """
     h, w = im.shape[:2]
     output = np.zeros((h, w + 1))
     for row in range(h):
@@ -177,10 +160,6 @@ def remove_seam_grayscale(im, boolmask):
 
 @jit
 def get_minimum_seam(im, mask=None, remove_mask=None):
-    """
-    DP algorithm for finding the seam of minimum energy. Code adapted from
-    https://karthikkaranth.me/blog/implementing-seam-carving-with-python/
-    """
     h, w = im.shape[:2]
     energyfn = forward_energy if USE_FORWARD_ENERGY else backward_energy
     M = energyfn(im)
@@ -220,10 +199,6 @@ def get_minimum_seam(im, mask=None, remove_mask=None):
     seam_idx.reverse()
     return np.array(seam_idx), boolmask
 
-
-########################################
-# MAIN ALGORITHM
-########################################
 
 def seams_removal(im, num_remove, mask=None, vis=False, rot=False):
     for _ in range(num_remove):
@@ -267,10 +242,6 @@ def seams_insertion(im, num_add, mask=None, vis=False, rot=False):
 
     return im, mask
 
-
-########################################
-# MAIN DRIVER FUNCTIONS
-########################################
 
 def seam_carve(im, dy, dx, mask=None, vis=False):
     im = im.astype(np.float64)
@@ -338,14 +309,6 @@ def object_removal(im, rmask, mask=None, vis=False, horizontal_removal=False):
 
 
 if __name__ == '__main__':
-    # backward_ene = backward_energy(cv2.imread('back.jpg'))
-    # backward_ene[np.where(backward_ene > 10)] = 255
-    # backward_ene[np.where(backward_ene < 10)] = 0
-    # cv2.imwrite('npwhere.jpg', backward_ene)
-    # for i in lightr:
-    #     print(i)
-    # print(backward_ene[2])
-    # cv2.imwrite('back_eng.jpg', backward_energy(cv2.imread('back.jpg')))
     ap = argparse.ArgumentParser()
     group = ap.add_mutually_exclusive_group(required=True)
     group.add_argument("-resize", action='store_true')
