@@ -8,12 +8,6 @@ import os
 from flask import Flask, request
 from flask_session import Session
 import time
-from flask_wtf.file import FileRequired,FileAllowed
-from wtforms import Form,FileField,StringField
-from wtforms.validators import InputRequired
-class UploadForm(Form):
-    pichead = FileField(validators=[FileRequired(),FileAllowed(['jpg','png','gif'])])
-    desc = StringField(validators=[InputRequired()])
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = 'filesystem'

@@ -1,4 +1,5 @@
 # This Python file use the following encoding: utf-8
+# Linux version
 import shutil
 import importlib,sys
 from PIL import Image
