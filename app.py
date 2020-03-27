@@ -133,17 +133,17 @@ def seam():
             print(session['notes'][-1])
             shutil.copyfile('C://Users/whzgo/PycharmProjects/Seam/' + session['notes'][-2], tmp_image)
             shutil.copyfile('C://Users/whzgo/PycharmProjects/Seam/' + session['notes'][-1], mask_image)
-            if wid is None or wid == '':
-                wid = ori_w
-                ddw = '0'
-            else:
-                ddw = str(int(wid) - ori_w)
-            if hei is None or hei == '':
-                hei = ori_h
-                ddh = '0'
-            else:
-                ddh = str(int(hei) - ori_h)
             if wid is not None or hei is not None:
+                if wid is None or wid == '':
+                    wid = ori_w
+                    ddw = '0'
+                else:
+                    ddw = str(int(wid) - ori_w)
+                if hei is None or hei == '':
+                    hei = ori_h
+                    ddh = '0'
+                else:
+                    ddh = str(int(hei) - ori_h)
                 os.system(
                     "python SeamCaver_two.py -resize -im " + tmp_image + " -out " + tmp_image + ' -mask ' + mask_image
                     + " -dy " + ddh + " -dx " + ddw + " -vis")
