@@ -142,7 +142,7 @@ def seam():
                 ddh = str(int(hei) - ori_h)
             if wid is not None or hei is not None:
                 os.system(
-                    "python SeamCaver_two.py -resize -im " + tmp_image + " -out " + tmp_image + ' -rmask ' + mask_image
+                    "python SeamCaver_two.py -resize -im " + tmp_image + " -out " + tmp_image + ' -mask ' + mask_image
                     + " -dy " + ddh + " -dx " + ddw)
                 tt = str(int(time.time()))
                 file_name = 'static/' + 'original' + tt + '.jpg'
@@ -159,7 +159,7 @@ def seam():
                 return html_data
             else:
                 os.system(
-                    "python SeamCaver_two.py -resize -im " + tmp_image + " -out " + tmp_image + ' -rmask ' + mask_image)
+                    "python SeamCaver_two.py -resize -im " + tmp_image + " -out " + tmp_image + ' -mask ' + mask_image)
                 tt = str(int(time.time()))
                 file_name = 'static/' + 'original' + tt + '.jpg'
                 session['notes'].append('static/' + 'original' + tt + '.jpg')
