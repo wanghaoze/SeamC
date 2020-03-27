@@ -8,6 +8,12 @@ import os
 from flask import Flask, request
 from flask_session import Session
 import time
+from flask_wtf.file import FileRequired,FileAllowed
+from wtforms import Form,FileField,StringField
+from wtforms.validators import InputRequired
+class UploadForm(Form):
+    pichead = FileField(validators=[FileRequired(),FileAllowed(['jpg','png','gif'])])
+    desc = StringField(validators=[InputRequired()])
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = 'filesystem'
@@ -49,7 +55,10 @@ def seam():
         my_file = request.files.get('img')
         remove_img = request.files.get('remove_img')
         pro_img = request.files.get('pro_img')
-        if remove_img is not None:
+        if remove_img is not None and remove_img.filename != '':
+            # print("remove_img")
+            # print(remove_img.filename)
+            # print("----------")
             ori_img = Image.open(session['notes'][-1])
             ori_w, ori_h = ori_img.size
             tt = str(int(time.time()))
@@ -110,7 +119,7 @@ def seam():
                     html_data = html_data.replace('original.jpg', file_name)
                 return html_data
 
-        if pro_img is not None:
+        if pro_img is not None and pro_img.filename != '':
             ori_img = Image.open(session['notes'][-1])
             ori_w, ori_h = ori_img.size
             tt = str(int(time.time()))
@@ -170,22 +179,34 @@ def seam():
                     html_data = html_data.replace('dis_height', str(height))
                     html_data = html_data.replace('original.jpg', file_name)
                 return html_data
-
         if my_file is not None:
-            tt = str(int(time.time()))
-            file_name = 'static/'+'original' + tt + '.jpg'
-            my_file.save(file_name)
-            session['notes'].append('static/'+'original' + tt + '.jpg')
-            print(my_file)
-            time.sleep(2)
-            img = Image.open(file_name)
-            width, height = img.size
-            with open(r'templates/process.html', 'rb') as f:
-                html_data = f.read().decode('utf-8')
-                html_data = html_data.replace('dis_width', str(width))
-                html_data = html_data.replace('dis_height', str(height))
-                html_data = html_data.replace('original.jpg', file_name)
-            return html_data
+            if my_file.filename == '':
+                file_name = 'static/'+'original1.jpg'
+                session['notes'].append('static/'+'original1.jpg')
+                time.sleep(2)
+                img = Image.open(file_name)
+                width, height = img.size
+                with open(r'templates/process.html', 'rb') as f:
+                    html_data = f.read().decode('utf-8')
+                    html_data = html_data.replace('dis_width', str(width))
+                    html_data = html_data.replace('dis_height', str(height))
+                    html_data = html_data.replace('original.jpg', file_name)
+                return html_data
+            else:
+                tt = str(int(time.time()))
+                file_name = 'static/'+'original' + tt + '.jpg'
+                my_file.save(file_name)
+                session['notes'].append('static/'+'original' + tt + '.jpg')
+                time.sleep(2)
+                img = Image.open(file_name)
+                width, height = img.size
+                with open(r'templates/process.html', 'rb') as f:
+                    html_data = f.read().decode('utf-8')
+                    html_data = html_data.replace('dis_width', str(width))
+                    html_data = html_data.replace('dis_height', str(height))
+                    html_data = html_data.replace('original.jpg', file_name)
+                return html_data
+
         wid = request.form.get('the_width1')
         hei = request.form.get('the_height1')
         if wid is not None or hei is not None:
