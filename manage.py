@@ -224,7 +224,7 @@ def seam():
             tt = str(int(time.time()))
             file_name = 'static/'+'original' + tt + '.jpg'
             session['notes'].append('static/' + 'original' + tt + '.jpg')
-            shutil.copyfile('/tmp', '/home/www/flask/' + file_name)
+            shutil.copyfile('/tmp/original.jpg', '/home/www/flask/' + file_name)
             img = Image.open('/home/www/flask/'+session['notes'][-1])
             width, height = img.size
             with open(r'templates/process.html', 'rb') as f:
