@@ -46,6 +46,8 @@ python SeamCaver_two.py -remove -im output/rmask-remove2.jpg -out output/rmask-r
 
 ## Process tools
 
+注意！ 在输入框中填入想要的图片目标宽度和高度
+
 ### 智能缩放功能用于无蒙版缩放
 
 ![](https://github.com/wanghaoze/SeamC/blob/master/output/no-mask-resize.png)
