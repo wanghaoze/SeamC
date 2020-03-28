@@ -3,8 +3,7 @@
 # python SeamCaver_two.py (-resize | -remove) -im IM -out OUT [-mask MASK]
 #                        [-rmask RMASK] [-dy DY] [-dx DX] [-vis] [-hremove] [-backward_energy]
 # Examples:
-# python SeamCaver_two.py -resize -im 【input.jpg】 -out 【output.jpg】
-#        -mask 【mask.jpg】 -dy 20 -dx -200 -vis
+# python
 # python SeamCaver_two.py -remove -im 【input.jpg】 -out 【output.jpg】
 #        -rmask 【remove_mask.jpg】 -vis
 
@@ -16,7 +15,7 @@ from scipy import ndimage as ndi
 
 SEAM_COLOR = np.array([255, 200, 200])  # seam visualization color (BGR)
 SHOULD_DOWNSIZE = True  # if True, downsize image for faster carving
-DOWNSIZE_WIDTH = 1000  # resized image width if SHOULD_DOWNSIZE is True
+DOWNSIZE_WIDTH = 2000  # resized image width if SHOULD_DOWNSIZE is True
 ENERGY_MASK_CONST = 100000.0  # large energy value for protective masking
 MASK_THRESHOLD = 10  # minimum pixel intensity for binary mask
 USE_FORWARD_ENERGY = True  # if True, use forward energy algorithm
