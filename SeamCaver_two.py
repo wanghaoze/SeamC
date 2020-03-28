@@ -3,9 +3,10 @@
 # python SeamCaver_two.py (-resize | -remove) -im IM -out OUT [-mask MASK]
 #                        [-rmask RMASK] [-dy DY] [-dx DX] [-vis] [-hremove] [-backward_energy]
 # Examples:
-# python
-# python SeamCaver_two.py -remove -im 【input.jpg】 -out 【output.jpg】
-#        -rmask 【remove_mask.jpg】 -vis
+# python SeamCaver_two.py -resize -im output/no-mask-resize2.jpg -out output/no-mask-resize2.jpg -dy 66 -dx -212 -vis
+# python SeamCaver_two.py -resize -im output/mask-resize2.jpg -out output/mask-resize4.jpg -mask output/mask-resize3.jpg
+#       -dy 0 -dx -458 -vis
+# python SeamCaver_two.py -remove -im output/rmask-remove2.jpg -out output/rmask-remove4.jpg -rmask output/rmask-remove3.jpg -vis
 
 import numpy as np
 import cv2
