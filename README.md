@@ -2,7 +2,7 @@
 
 This is a practice of Seam Carving algorithm
 
-Based on flask and python.
+Based on flask & python & HTML & JavaScript.
 
 Other used tools: Linux & Windows & uwsgi & nginx.
 
