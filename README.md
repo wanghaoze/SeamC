@@ -18,65 +18,65 @@ python version
 
 ## Home Page
 
-![image-20200328160056891](C:\Users\whzgo\AppData\Roaming\Typora\typora-user-images\image-20200328160056891.png)
+![](https://github.com/wanghaoze/SeamC/blob/master/output/homepage.png)
 
 ## About us
 
-![image-20200328160227345](C:\Users\whzgo\AppData\Roaming\Typora\typora-user-images\image-20200328160227345.png)
+![](https://github.com/wanghaoze/SeamC/blob/master/output/about-us.png)
 
 ## Process tools
 
 ### 智能缩放功能用于无蒙版缩放
 
-![image-20200328163142432](C:\Users\whzgo\AppData\Roaming\Typora\typora-user-images\image-20200328163142432.png)
+![](https://github.com/wanghaoze/SeamC/blob/master/output/no-mask-resize.png)
 
-![image-20200328163303939](C:\Users\whzgo\AppData\Roaming\Typora\typora-user-images\image-20200328163303939.png)
+![](https://github.com/wanghaoze/SeamC/blob/master/output/no-mask-resize1.png)
 
-![](D:\image6.jpg)
+![](https://github.com/wanghaoze/SeamC/blob/master/output/no-mask-resize2.jpg)
 
 原图片
 
-![](C:\Users\whzgo\Desktop\SeamC-master\demos\original1585384361.jpg)
+![](https://github.com/wanghaoze/SeamC/blob/master/output/no-mask-resize3.jpg)
 
 效果图
 
 ### 保护蒙版功能用于带蒙版缩放
 
-会给图片蒙版处加一正权值缩放，被保护的部分
+会给图片蒙版处加一正权值缩放，被保护的部分几乎不会改变
 
-![image-20200328160150117](C:\Users\whzgo\AppData\Roaming\Typora\typora-user-images\image-20200328160150117.png)
+![](https://github.com/wanghaoze/SeamC/blob/master/output/mask-resize.png)
 
-![image-20200328161709770](C:\Users\whzgo\AppData\Roaming\Typora\typora-user-images\image-20200328161709770.png)
+![](https://github.com/wanghaoze/SeamC/blob/master/output/mask-resize1.png)
 
-几乎不会改变
 
-![](C:\Users\whzgo\Desktop\SeamC-master\demos\original1.jpg)
+
+![](https://github.com/wanghaoze/SeamC/blob/master/output/mask-resize2.jpg)
 
 原图片
 
-![](C:\Users\whzgo\Desktop\SeamC-master\demos\ratatouille_mask.jpg)
+![](https://github.com/wanghaoze/SeamC/blob/master/output/mask-resize3.jpg)
 
 保护蒙版图
 
-![](C:\Users\whzgo\Desktop\SeamC-master\demos\ratatouille_resize.jpg)
-
-### 抠图蒙版功能用于物体移除
+![](https://github.com/wanghaoze/SeamC/blob/master/output/mask-resize4.jpg)
 
 效果图
 
-![image-20200328162122815](C:\Users\whzgo\AppData\Roaming\Typora\typora-user-images\image-20200328162122815.png)
+### 抠图蒙版功能用于物体移除
 
-![image-20200328162300684](C:\Users\whzgo\AppData\Roaming\Typora\typora-user-images\image-20200328162300684.png)
+![](https://github.com/wanghaoze/SeamC/blob/master/output/rmask-remove.png)
 
-![](D:\2007_000243.jpg)
+![](https://github.com/wanghaoze/SeamC/blob/master/output/rmask-remove1.png)
+
+![](https://github.com/wanghaoze/SeamC/blob/master/output/rmask-remove2.jpg)
 
 原图片
 
-![](D:\2007_0002.jpg)
+![](https://github.com/wanghaoze/SeamC/blob/master/output/rmask-remove3.jpg)
 
 蒙版图
 
-![](D:\res.jpg)
+![](https://github.com/wanghaoze/SeamC/blob/master/output/rmask-remove4.jpg)
 
 效果图
 
