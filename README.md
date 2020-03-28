@@ -14,8 +14,28 @@ manage.py is for the Linux version.
 
 app.py for the Windows version.
 
-python version
+python version： 3.6.8
 
+Please install the requirements.txt first  
+using :
+```
+pip install -r requirements.txt
+```
+
+The SeamCaver.py and SeamCaver_two.py are core code.  
+SeamCaver_two.py is based on SeamCaver.py, used jit to acclerate the process  
+Usage:
+```
+python SeamCaver_two.py -resize -im inputImg_path -out outputImg_path  -dy deltaHeight -dx deltaWidth [-vis]
+python SeamCaver_two.py -resize -im inputImg_path -out outputImg_path -mask maskImg_path -dy deltaHeight -dx deltaWidth [-vis]
+python SeamCaver_two.py -remove -im inputImg_path -out outputImg_path -rmask rmaskImg_path [-vis]
+```
+example:
+```
+python SeamCaver_two.py -resize -im output/no-mask-resize2.jpg -out output/no-mask-resize2.jpg -dy 66 -dx -212 -vis
+python SeamCaver_two.py -resize -im output/mask-resize2.jpg -out output/mask-resize4.jpg -mask output/mask-resize3.jpg -dy 0 -dx -458 -vis
+python SeamCaver_two.py -remove -im output/rmask-remove2.jpg -out output/rmask-remove4.jpg -rmask output/rmask-remove3.jpg -vis
+```
 ## Home Page
 
 ![](https://github.com/wanghaoze/SeamC/blob/master/output/homepage.png)
