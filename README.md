@@ -84,8 +84,8 @@ If you have a problem, contact me with whzgoodfellow@gmail.com.
 
 All right reserved. For academic use only. 
 
-Please indicate the source if you used it.
-————————————————
+Please indicate the source if you used it.  
+————————————————  
 Copyright statement: This article is an original project of Github blogger "wanghaoze" and Sichuan University Innovation Project Team. It follows the CC 4.0 BY-SA copyright agreement. Please reprint the original source link and this statement for reprint.
 Original link: https://github.com/wanghaoze/SeamC 
 
