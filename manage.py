@@ -129,6 +129,10 @@ def seam():
             img = Image.open('/home/www/flask/'+file_name)
             width, height = img.size
             if ori_h != height or ori_w != width:
+                print("ori_w:"+ori_w)
+                print("ori_h"+ori_h)
+                print("width:"+width)
+                print("height:"+height)
                 img = img.resize((ori_w, ori_h), Image.ANTIALIAS)
                 img.save(file_name)
             wid = request.form.get('the_width1')
