@@ -55,28 +55,35 @@ def seam():
             ori_w, ori_h = ori_img.size
             tt = str(int(time.time()))
             file_name = 'static/' + 'original' + tt + '.jpg'
-            remove_img.save('/home/www/flask/'+file_name)
+            remove_img.save(file_name)
             session['notes'].append('static/' + 'original' + tt + '.jpg')
             time.sleep(2)
             img = Image.open('/home/www/flask/'+file_name)
             width, height = img.size
             if ori_h != height or ori_w != width:
                 img = img.resize((ori_w, ori_h), Image.ANTIALIAS)
-                img.save('/home/www/flask/'+file_name)
-            wid = request.form.get('the_width3')
-            hei = request.form.get('the_height3')
+                img.save(file_name)
+            wid = request.form.get('the_width2')
+            hei = request.form.get('the_height2')
             tmp_image = '/tmp/original.jpg'
             mask_image = '/tmp/mask.jpg'
             print(session['notes'][-1])
             shutil.copyfile('/home/www/flask/' + session['notes'][-2], tmp_image)
             shutil.copyfile('/home/www/flask/' + session['notes'][-1], mask_image)
-            if wid is None:
+            if wid is None or wid == '':
                 wid = ori_w
-            if hei is None:
+                ddw = '0'
+            else:
+                ddw = str(int(wid) - ori_w)
+            if hei is None or hei == '':
                 hei = ori_h
-            ddw = str(int(wid) - ori_w)
-            ddh = str(int(hei) - ori_h)
+                ddh = '0'
+            else:
+                ddh = str(int(hei) - ori_h)
             if wid is not None or hei is not None:
+                print(
+                    "python SeamCaver_two.py -remove -im " + tmp_image + " -out " + tmp_image + ' -rmask ' + mask_image
+                    + " -dy " + ddh + " -dx " + ddw)
                 os.system(
                     "python SeamCaver_two.py -remove -im " + tmp_image + " -out " + tmp_image + ' -rmask ' + mask_image
                     + " -dy " + ddh + " -dx " + ddw)
@@ -94,6 +101,7 @@ def seam():
                     html_data = html_data.replace('original.jpg', file_name)
                 return html_data
             else:
+                print("python SeamCaver_two.py -remove -im " + tmp_image + " -out " + tmp_image + ' -rmask ' + mask_image)
                 os.system(
                     "python SeamCaver_two.py -remove -im " + tmp_image + " -out " + tmp_image + ' -rmask ' + mask_image)
                 tt = str(int(time.time()))
@@ -115,16 +123,16 @@ def seam():
             ori_w, ori_h = ori_img.size
             tt = str(int(time.time()))
             file_name = 'static/' + 'original' + tt + '.jpg'
-            pro_img.save('/home/www/flask/'+file_name)
+            pro_img.save(file_name)
             session['notes'].append('static/' + 'original' + tt + '.jpg')
             time.sleep(2)
             img = Image.open('/home/www/flask/'+file_name)
             width, height = img.size
             if ori_h != height or ori_w != width:
                 img = img.resize((ori_w, ori_h), Image.ANTIALIAS)
-                img.save('/home/www/flask/'+file_name)
-            wid = request.form.get('the_width2')
-            hei = request.form.get('the_height2')
+                img.save(file_name)
+            wid = request.form.get('the_width1')
+            hei = request.form.get('the_height1')
             tmp_image = '/tmp/original.jpg'
             mask_image = '/tmp/mask.jpg'
             print(session['notes'][-1])
@@ -141,6 +149,8 @@ def seam():
                     ddh = '0'
                 else:
                     ddh = str(int(hei) - ori_h)
+                print("python SeamCaver_two.py -resize -im " + tmp_image + " -out " + tmp_image + ' -mask ' + mask_image
+                    + " -dy " + ddh + " -dx " + ddw)
                 os.system(
                     "python SeamCaver_two.py -resize -im " + tmp_image + " -out " + tmp_image + ' -mask ' + mask_image
                     + " -dy " + ddh + " -dx " + ddw)
@@ -158,6 +168,7 @@ def seam():
                     html_data = html_data.replace('original.jpg', file_name)
                 return html_data
             else:
+                print("python SeamCaver_two.py -resize -im " + tmp_image + " -out " + tmp_image + ' -mask ' + mask_image)
                 os.system(
                     "python SeamCaver_two.py -resize -im " + tmp_image + " -out " + tmp_image + ' -mask ' + mask_image)
                 tt = str(int(time.time()))
@@ -202,8 +213,10 @@ def seam():
                     html_data = html_data.replace('dis_height', str(height))
                     html_data = html_data.replace('original.jpg', file_name)
                 return html_data
-        wid = request.form.get('the_width1')
-        hei = request.form.get('the_height1')
+        wid = request.form.get('the_width')
+        hei = request.form.get('the_height')
+        print("the_width:" + wid)
+        print("the_height:" + hei)
         if wid is not None or hei is not None:
             tmp_image = '/tmp/original.jpg'
             print(session['notes'][-1])
@@ -223,6 +236,9 @@ def seam():
                 ddh = str(int(hei) - ori_h)
             print(wid)
             print(ori_w)
+            print(
+                "python SeamCaver_two.py -resize -im " + tmp_image + " -out " + tmp_image +
+                " -dy "+ddh+" -dx "+ddw)
             os.system(
                 "python SeamCaver_two.py -resize -im " + tmp_image + " -out " + tmp_image +
                 " -dy "+ddh+" -dx "+ddw)
