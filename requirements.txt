@@ -48,7 +48,7 @@ oauthlib==3.1.0
 opencv-python==4.1.2.30
 opt-einsum==3.1.0
 pandas==0.25.3
-Pillow==6.2.1
+Pillow==8.3.2
 protobuf==3.10.0
 pycryptodomex==3.9.4
 pydot==1.4.1
