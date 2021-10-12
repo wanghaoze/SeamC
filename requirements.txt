@@ -45,7 +45,7 @@ mysql-connector-python==8.0.18
 numba==0.47.0
 numpy==1.17.3
 oauthlib==3.1.0
-opencv-python==4.1.2.30
+opencv-python==4.2.0.32
 opt-einsum==3.1.0
 pandas==0.25.3
 Pillow==6.2.1
